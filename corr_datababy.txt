@@ -1,0 +1,264 @@
+
+R version 4.4.1 (2024-06-14 ucrt) -- "Race for Your Life"
+Copyright (C) 2024 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64
+
+R est un logiciel libre livré sans AUCUNE GARANTIE.
+Vous pouvez le redistribuer sous certaines conditions.
+Tapez 'license()' ou 'licence()' pour plus de détails.
+
+R est un projet collaboratif avec de nombreux contributeurs.
+Tapez 'contributors()' pour plus d'information et
+'citation()' pour la façon de le citer dans les publications.
+
+Tapez 'demo()' pour des démonstrations, 'help()' pour l'aide
+en ligne ou 'help.start()' pour obtenir l'aide au format HTML.
+Tapez 'q()' pour quitter R.
+
+[Workspace loaded from ~/.RData]
+
+> datababy <- read.csv("C:/Users/msi/Desktop/R/datababy.csv", sep=";")
+>   View(datababy)
+> data.dim
+Erreur : objet 'data.dim' introuvable
+> data.dim()
+Erreur dans data.dim() : impossible de trouver la fonction "data.dim"
+> colnames(data)
+NULL
+> 
+> 
+> 
+> View(datababy)
+> dim(data)
+NULL
+> data <- read.table(file = file.choose(), header = TRUE, sep = ";")
+> 
+> dim
+function (x)  .Primitive("dim")
+> dim(data)
+[1] 1236    9
+> View(data)
+> View(data)
+> head(data)
+  X  bwt gestation parity age height weight smoke tension
+1 1 3.43       284  FALSE  27  155.0  45.30 FALSE    16.1
+2 2 3.23       282  FALSE  33  160.0  61.16 FALSE    12.7
+3 3 3.66       279  FALSE  28  160.0  52.09  TRUE    14.8
+4 4 3.51        NA  FALSE  36  172.5  86.07 FALSE    12.8
+5 5 3.09       282  FALSE  23  167.5  56.62  TRUE    13.3
+6 6 3.89       286  FALSE  25  155.0  42.13 FALSE    13.3
+> 
+> boxplot(data$age, main = "Boxplot de l'âge", ylab = "Âge", col = "lightblue")
+> 
+> boxplot(data$age)
+> boxplot(data$age, main = "Boxplot de l'âge", ylab = "Âge", col = "lightblue")
+> 
+> boxplot(data$age)
+> Q1 <- quantile(data$age, 0.25, na.rm = TRUE)
+> Q3 <- quantile(data$age, 0.75, na.rm = TRUE)
+> 
+> IQR <- Q3 - Q1
+> 
+> upper_bound <- Q3 + 1.5 * IQR
+> 
+> data$age[data$age < lower_bound | data$age > upper_bound] <- NA
+Erreur : objet 'lower_bound' introuvable
+> lower_bound <- Q1 - 1.5 * IQR
+> 
+> data$age[data$age < lower_bound | data$age > upper_bound] <- NA
+> 
+> head(data)
+  X  bwt gestation parity age height weight smoke
+1 1 3.43       284  FALSE  27  155.0  45.30 FALSE
+2 2 3.23       282  FALSE  33  160.0  61.16 FALSE
+3 3 3.66       279  FALSE  28  160.0  52.09  TRUE
+4 4 3.51        NA  FALSE  36  172.5  86.07 FALSE
+5 5 3.09       282  FALSE  23  167.5  56.62  TRUE
+6 6 3.89       286  FALSE  25  155.0  42.13 FALSE
+  tension
+1    16.1
+2    12.7
+3    14.8
+4    12.8
+5    13.3
+6    13.3
+> 
+> head(data)
+  X  bwt gestation parity age height weight smoke tension
+1 1 3.43       284  FALSE  27  155.0  45.30 FALSE    16.1
+2 2 3.23       282  FALSE  33  160.0  61.16 FALSE    12.7
+3 3 3.66       279  FALSE  28  160.0  52.09  TRUE    14.8
+4 4 3.51        NA  FALSE  36  172.5  86.07 FALSE    12.8
+5 5 3.09       282  FALSE  23  167.5  56.62  TRUE    13.3
+6 6 3.89       286  FALSE  25  155.0  42.13 FALSE    13.3
+> boxplot(data$age, main = "Boxplot de l'âge sans valeurs aberrantes", ylab = "Âge", col = "lightblue")
+> 
+> > boxplot(data$age)
+Erreur : '>' inattendu(e) dans ">"
+>  boxplot(data$age)
+> 
+> sum(is.na(data$age))
+[1] 4
+> 
+> install.packages("mice")
+
+Les packages binaires téléchargés sont dans
+	C:\Users\msi\AppData\Local\Temp\Rtmp4CItIB\downloaded_packages
+> 
+> library(mice)
+
+Attachement du package : ‘mice’
+
+L'objet suivant est masqué depuis ‘package:stats’:
+
+    filter
+
+Les objets suivants sont masqués depuis ‘package:base’:
+
+    cbind, rbind
+
+> 
+> summary(data)
+       X             bwt           
+ Min.   :  1.0   Length:1236       
+ 1st Qu.:119.0   Class :character  
+ Median :381.5   Mode  :character  
+ Mean   :425.5                     
+ 3rd Qu.:690.2                     
+ Max.   :999.0                     
+                                   
+   gestation       parity             age       
+ Min.   :148.0   Mode :logical   Min.   :15.00  
+ 1st Qu.:272.0   FALSE:921       1st Qu.:23.00  
+ Median :280.0   TRUE :315       Median :26.00  
+ Mean   :279.3                   Mean   :27.23  
+ 3rd Qu.:288.0                   3rd Qu.:31.00  
+ Max.   :353.0                   Max.   :43.00  
+ NA's   :13                      NA's   :4      
+     height          weight         smoke        
+ Min.   :132.5   Min.   : 39.41   Mode :logical  
+ 1st Qu.:155.0   1st Qu.: 52.09   FALSE:742      
+ Median :160.0   Median : 57.08   TRUE :484      
+ Mean   :160.1   Mean   : 85.67   NA's :10       
+ 3rd Qu.:165.0   3rd Qu.: 63.42                  
+ Max.   :180.0   Max.   :999.00                  
+ NA's   :22                                      
+    tension     
+ Min.   : 9.20  
+ 1st Qu.:12.50  
+ Median :13.70  
+ Mean   :14.41  
+ 3rd Qu.:16.20  
+ Max.   :23.70  
+                
+> summary(data)
+       X             bwt              gestation       parity             age            height     
+ Min.   :  1.0   Length:1236        Min.   :148.0   Mode :logical   Min.   :15.00   Min.   :132.5  
+ 1st Qu.:119.0   Class :character   1st Qu.:272.0   FALSE:921       1st Qu.:23.00   1st Qu.:155.0  
+ Median :381.5   Mode  :character   Median :280.0   TRUE :315       Median :26.00   Median :160.0  
+ Mean   :425.5                      Mean   :279.3                   Mean   :27.23   Mean   :160.1  
+ 3rd Qu.:690.2                      3rd Qu.:288.0                   3rd Qu.:31.00   3rd Qu.:165.0  
+ Max.   :999.0                      Max.   :353.0                   Max.   :43.00   Max.   :180.0  
+                                    NA's   :13                      NA's   :4       NA's   :22     
+     weight         smoke            tension     
+ Min.   : 39.41   Mode :logical   Min.   : 9.20  
+ 1st Qu.: 52.09   FALSE:742       1st Qu.:12.50  
+ Median : 57.08   TRUE :484       Median :13.70  
+ Mean   : 85.67   NA's :10        Mean   :14.41  
+ 3rd Qu.: 63.42                   3rd Qu.:16.20  
+ Max.   :999.00                   Max.   :23.70  
+                                                 
+> set.seed(123)
+> 
+> imputed_data <- mice(data, m = 5, method = 'pmm', seed = 123)
+
+ iter imp variable
+  1   1  gestation  age  height  smoke
+  1   2  gestation  age  height  smoke
+  1   3  gestation  age  height  smoke
+  1   4  gestation  age  height  smoke
+  1   5  gestation  age  height  smoke
+  2   1  gestation  age  height  smoke
+  2   2  gestation  age  height  smoke
+  2   3  gestation  age  height  smoke
+  2   4  gestation  age  height  smoke
+  2   5  gestation  age  height  smoke
+  3   1  gestation  age  height  smoke
+  3   2  gestation  age  height  smoke
+  3   3  gestation  age  height  smoke
+  3   4  gestation  age  height  smoke
+  3   5  gestation  age  height  smoke
+  4   1  gestation  age  height  smoke
+  4   2  gestation  age  height  smoke
+  4   3  gestation  age  height  smoke
+  4   4  gestation  age  height  smoke
+  4   5  gestation  age  height  smoke
+  5   1  gestation  age  height  smoke
+  5   2  gestation  age  height  smoke
+  5   3  gestation  age  height  smoke
+  5   4  gestation  age  height  smoke
+  5   5  gestation  age  height  smoke
+Message d'avis :
+Number of logged events: 1 
+> summary(imputed_data)
+Class: mids
+Number of multiple imputations:  5 
+Imputation methods:
+        X       bwt gestation    parity       age 
+       ""        ""     "pmm"        ""     "pmm" 
+   height    weight     smoke   tension 
+    "pmm"        ""     "pmm"        "" 
+PredictorMatrix:
+          X bwt gestation parity age height
+X         0   0         1      1   1      1
+bwt       1   0         1      1   1      1
+gestation 1   0         0      1   1      1
+parity    1   0         1      0   1      1
+age       1   0         1      1   0      1
+height    1   0         1      1   1      0
+          weight smoke tension
+X              1     1       1
+bwt            1     1       1
+gestation      1     1       1
+parity         1     1       1
+age            1     1       1
+height         1     1       1
+Number of logged events:  1 
+  it im dep     meth out
+1  0  0     constant bwt
+> 
+> summary(imputed_data)
+Class: mids
+Number of multiple imputations:  5 
+Imputation methods:
+        X       bwt gestation    parity       age    height    weight     smoke   tension 
+       ""        ""     "pmm"        ""     "pmm"     "pmm"        ""     "pmm"        "" 
+PredictorMatrix:
+          X bwt gestation parity age height weight smoke tension
+X         0   0         1      1   1      1      1     1       1
+bwt       1   0         1      1   1      1      1     1       1
+gestation 1   0         0      1   1      1      1     1       1
+parity    1   0         1      0   1      1      1     1       1
+age       1   0         1      1   0      1      1     1       1
+height    1   0         1      1   1      0      1     1       1
+Number of logged events:  1 
+  it im dep     meth out
+1  0  0     constant bwt
+> 
+> completed_data <- complete(imputed_data, 1)
+> head(completed_data)
+  X  bwt gestation parity age height weight smoke tension
+1 1 3.43       284  FALSE  27  155.0  45.30 FALSE    16.1
+2 2 3.23       282  FALSE  33  160.0  61.16 FALSE    12.7
+3 3 3.66       279  FALSE  28  160.0  52.09  TRUE    14.8
+4 4 3.51       281  FALSE  36  172.5  86.07 FALSE    12.8
+5 5 3.09       282  FALSE  23  167.5  56.62  TRUE    13.3
+6 6 3.89       286  FALSE  25  155.0  42.13 FALSE    13.3
+> 
+> sum(is.na(completed_data$age))  # Should return 0 now
+[1] 0
+> 
+> # Boxplot of the imputed age data
+> boxplot(completed_data$age, main = "Boxplot de l'âge après imputation", ylab = "Âge", col = "lightgreen")
+> 
+> 
